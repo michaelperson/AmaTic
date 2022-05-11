@@ -1,0 +1,7 @@
+{
+  "name": "AmaTic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
