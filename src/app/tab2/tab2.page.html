@@ -1,17 +1,55 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="danger">
     <ion-title>
-      Mon Panier
+      Cart
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">zorro</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="bg-gray">
 
-  <app-explore-container name="tarzan"></app-explore-container>
+  <div *ngIf="items.length < 1" class="noitem">
+    <img  src="assets/images/empty-cart.svg" />
+    <h1>Oops!</h1>
+  </div>
+
+  <ion-list *ngIf="items.length > 0" class="bg-gray">
+    <ion-row *ngFor="let cartitem of items;let i = index;"class="rrow"
+    class="ion-no-padding mt-1 bg-white">
+        <ion-col size="3">
+            <img src="{{cartitem.product.picture || 'assets/images/products.svg'}}"
+            style="height: 100%;"/>
+        </ion-col>
+        <ion-col size="9">
+            <h4 class="brand">{{ cartitem.product.title }} <span style="float:right; font-size: 1.4rem;"><ion-icon name="close"></ion-icon></span></h4>
+            <h5 class="amount">{{ cartitem.product.price | currency: cartitem.product.currency}}</h5>
+
+            <ion-row class="left">
+              <ion-col size="12" style="display: flex; align-items: center;">
+                <p class="ion-no-margin">Quantity  </p>
+                <p class="qty-bar ion-no-margin" style="padding: 0px 10px;">
+                   <ion-icon  style="margin-right:5px;" class="theme-color-shade"
+                    name="remove-circle"></ion-icon>{{ cartitem.qty }}
+                    <ion-icon   style="margin-left:5px;" class="theme-color-shade"
+                    name="add-circle"></ion-icon></p>
+              </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+  </ion-list>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar class="bg-gray" *ngIf="items.length > 0">
+    <ion-row class="footer-bar">
+      <ion-col class="p-12-15">
+        <div>
+          <h2 class="heading">Order Info</h2>
+          <p class="mb-1">Total Quantity : {{ totalCartQty }}</p>
+          <p class="mt-1">Total Price    : {{ totalPrice | currency: '€' }}</p>
+        </div>
+        <ion-button mode="ios" color="danger" expand="full" > Place Order </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
