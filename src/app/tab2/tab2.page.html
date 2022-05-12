@@ -8,13 +8,13 @@
 
 <ion-content class="bg-gray">
 
-  <div *ngIf="items.length < 1" class="noitem">
+  <div *ngIf="cartService.items.length < 1" class="noitem">
     <img  src="assets/images/empty-cart.svg" />
     <h1>Oops!</h1>
   </div>
 
-  <ion-list *ngIf="items.length > 0" class="bg-gray">
-    <ion-row *ngFor="let cartitem of items;let i = index;"class="rrow"
+  <ion-list *ngIf="cartService.items.length > 0" class="bg-gray">
+    <ion-row *ngFor="let cartitem of cartService.items;let i = index;"class="rrow"
     class="ion-no-padding mt-1 bg-white">
         <ion-col size="3">
             <img src="{{cartitem.product.picture || 'assets/images/products.svg'}}"
@@ -40,13 +40,13 @@
 </ion-content>
 
 <ion-footer class="ion-no-border">
-  <ion-toolbar class="bg-gray" *ngIf="items.length > 0">
+  <ion-toolbar class="bg-gray" *ngIf="cartService.items.length > 0">
     <ion-row class="footer-bar">
       <ion-col class="p-12-15">
         <div>
           <h2 class="heading">Order Info</h2>
-          <p class="mb-1">Total Quantity : {{ totalCartQty }}</p>
-          <p class="mt-1">Total Price    : {{ totalPrice | currency: '€' }}</p>
+          <p class="mb-1">Total Quantity : {{ cartService.totalCartQty }}</p>
+          <p class="mt-1">Total Price    : {{ cartService.totalPrice | currency: '€' }}</p>
         </div>
         <ion-button mode="ios" color="danger" expand="full" > Place Order </ion-button>
       </ion-col>

@@ -47,7 +47,7 @@
             <ion-card-content>
               {{p.price}} {{p.currency}}
               <br>
-              <ion-button>Add to Basket</ion-button>
+              <ion-button (click)="addToCart(p)" expand="full" color="danger" size="small">Add to Basket</ion-button>
             </ion-card-content>
           </ion-card>
       </ion-col>
